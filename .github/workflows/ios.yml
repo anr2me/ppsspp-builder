@@ -35,7 +35,7 @@ jobs:
       - name: Install Prerequisites
         run: |
           brew upgrade
-          brew install ldid dpkg python3 cmake sdl2 libzip snappy
+          brew install ldid dpkg python3 gnu-sed make cmake sdl2 libzip snappy
           # Check Xcode version
           xcodebuild -version
           # List available Xcode versions
