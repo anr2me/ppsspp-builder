@@ -32,7 +32,7 @@ jobs:
           cd ppsspp
           git submodule update --init --recursive
           git fetch --deepen=15000 --no-recurse-submodules --tags
-          echo "version_number=$(git describe --tags --match='v*' | ${SED} -e 's@-\([^-]*\)-\([^-]*\)$$@-\1-\2@;s@^v@@;s@%@~@g')" >> $GITHUB_OUTPUT
+          echo "version_number=$(git describe --tags --match='v*' | sed -e 's@-\([^-]*\)-\([^-]*\)$$@-\1-\2@;s@^v@@;s@%@~@g')" >> $GITHUB_OUTPUT
           
 
       - name: Install Prerequisites
