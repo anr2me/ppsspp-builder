@@ -26,11 +26,14 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Checkout ppsspp
+        id: ppsspp
         run: |
           git clone https://github.com/hrydgard/ppsspp.git
           cd ppsspp
           git submodule update --init --recursive
           git fetch --deepen=15000 --no-recurse-submodules --tags
+          echo "version_number=$(git describe --tags --match='v*' | ${SED} -e 's@-\([^-]*\)-\([^-]*\)$$@-\1-\2@;s@^v@@;s@%@~@g')" >> $GITHUB_OUTPUT
+          
 
       - name: Install Prerequisites
         run: |
@@ -70,7 +73,7 @@ jobs:
           name: iOS-${{ github.event.inputs.buildVariant }} build
           path: |
             PPSSPP*.ipa
-            PPSSPP*.deb
+            org.ppsspp*.deb
           
       - name: Test
         env:
