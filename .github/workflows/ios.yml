@@ -30,6 +30,19 @@ jobs:
           git clone https://github.com/hrydgard/ppsspp.git
           cd ppsspp
           git submodule update --init --recursive
+          git fetch --deepen=15000 --no-recurse-submodules --tags
+
+      - name: Install Prerequisites
+        run: |
+          brew upgrade
+          brew install ldid dpkg python3 cmake sdl2 libzip snappy
+          # Check Xcode version
+          xcodebuild -version
+          # List available Xcode versions
+          ls /Applications | grep Xcode
+          # Select a specific Xcode version. The recommended Xcode version is 9.4.1 according to https://github.com/Halo-Michael/ppsspp-builder
+          #sudo xcode-select -s /Applications/Xcode_15.2.app/Contents/Developer
+          sudo iod-setup sdk
           
       - name: Set Default Scheme
         run: |
